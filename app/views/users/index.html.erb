@@ -1,0 +1,61 @@
+<div class="row">
+  <h1 class="text-center">Indianapolis Rubyists</h1>
+  <%= @indy_users.inspect %>
+</div>
+<div class="row header">
+  <div class="col-xs-2">
+    <p class="text-center">
+      Avatar
+    </p>
+  </div>
+  <div class="col-xs-3">
+    <p class="text-center">
+      User(link to repo)
+    </p>
+  </div>
+  <div class="col-xs-2">
+    <p class="text-center">
+      Start Date
+    </p>
+  </div>
+  <div class="col-xs-2">
+    <p class="text-center">
+      Number of Repos
+    </p>
+  </div>
+  <div class="col-xs-2">
+    <p class="text-center">
+      Followers
+    </p>
+  </div>
+</div>
+<% @indy_users.each do |u| %>
+  <% user = CLIENT.user(u.id) %>
+  <div class="row">
+    <div class="col-xs-2">
+      <%= image_tag  user.avatar_url, class:"img-responsive avatar center-block" %>
+    </div>
+    <div class="col-xs-3">
+      <p class="text-center">
+        <%= link_to  user.url do %>
+          <%= user.login %>
+        <% end %>
+      </p>
+    </div>
+    <div class="col-xs-2">
+      <p class="text-center">
+        <%= user.created_at.strftime("User since %m/%d/%Y") %>
+      </p>
+    </div>
+    <div class="col-xs-2">
+      <p class="text-center">
+        <%= user.public_repos %>
+      </p>
+    </div>
+    <div class="col-xs-2">
+      <p class="text-center">
+        <%= user.followers %>
+      </p>
+    </div>
+  </div>
+<% end %>
